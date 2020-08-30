@@ -17,7 +17,7 @@ class AppointmentsRepository {
     return findAppointment || null;
   }
 
-  public getAllAppointments(): Appointment[] {
+  public all(): Appointment[] {
     return this.appointments;
   }
 }
