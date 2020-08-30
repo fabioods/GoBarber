@@ -2,14 +2,16 @@ import { parseISO } from 'date-fns';
 import { Router } from 'express';
 import AppointmentsRepository from '../repository/AppointmentsRepository';
 import CreateAppointmentService from '../service/CreateAppointmentService';
+import GetAllAppointments from '../service/GetAllAppointments';
 
 const appointmentsRouter = Router();
 
 const appointmentsRepository = new AppointmentsRepository();
 
-appointmentsRouter.get('/', (req, res) =>
-  res.json(appointmentsRepository.all()),
-);
+appointmentsRouter.get('/', (req, res) => {
+  const allAppointments = new GetAllAppointments(appointmentsRepository);
+  return res.json(allAppointments.execute());
+});
 
 appointmentsRouter.post('/', (req, res) => {
   try {
