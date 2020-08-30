@@ -22,7 +22,10 @@ appointmentsRouter.post('/', (req, res) => {
     return res.status(400).json({ message: 'This hour is already used' });
   }
 
-  const appointment = appointmentsRepository.create(provider, parsedDate);
+  const appointment = appointmentsRepository.create({
+    provider,
+    date: parsedDate,
+  });
 
   return res.json(appointment);
 });
