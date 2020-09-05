@@ -1,15 +1,12 @@
+import { getCustomRepository } from 'typeorm';
 import Appointment from '../model/Appointment';
 import AppointmentsRepository from '../repository/AppointmentsRepository';
 
 class GelAllAppointments {
-  private appointmentsRepository: AppointmentsRepository;
-
-  constructor(appointmentsRepository: AppointmentsRepository) {
-    this.appointmentsRepository = appointmentsRepository;
-  }
-
-  public execute(): Appointment[] {
-    return this.appointmentsRepository.all();
+  public async execute(): Promise<Appointment[]> {
+    const appointmentsRepository = getCustomRepository(AppointmentsRepository);
+    const appointments = await appointmentsRepository.find();
+    return appointments;
   }
 }
 
