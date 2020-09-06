@@ -33,9 +33,9 @@ export default class CreateSessionService {
       throw new Error('Incorrect email/password combination');
     }
     const secret = String(process.env.SECRET);
-    const token = sign({ id: user.id }, secret, {
+    const token = sign({}, secret, {
       subject: user.id,
-      expiresIn: '1h',
+      expiresIn: '1d',
     });
 
     return {
