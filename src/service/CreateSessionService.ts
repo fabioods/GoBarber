@@ -32,7 +32,7 @@ export default class CreateSessionService {
     if (!passwordMatch) {
       throw new Error('Incorrect email/password combination');
     }
-    const secret = String(process.env.SECRET);
+    const secret = process.env.SECRET;
     const token = sign({}, secret, {
       subject: user.id,
       expiresIn: '1d',

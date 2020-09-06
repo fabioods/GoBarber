@@ -19,7 +19,7 @@ export default function ensureAuth(
   }
 
   const [, token] = authHeader.split(' ');
-  const secret = String(process.env.SECRET);
+  const secret = process.env.SECRET;
 
   try {
     const { sub: id } = verify(token, secret) as TokenResponse;
