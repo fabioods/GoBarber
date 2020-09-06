@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
+import AppError from '../errors/AppError';
 
 interface TokenResponse {
   iat: number;
@@ -15,7 +16,7 @@ export default function ensureAuth(
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    throw new Error('JWT token not found');
+    throw new AppError('JWT token not found', 401);
   }
 
   const [, token] = authHeader.split(' ');
@@ -26,6 +27,6 @@ export default function ensureAuth(
     req.user = { id };
     return next();
   } catch {
-    throw new Error('JWT token incorrect format');
+    throw new AppError('JWT token incorrect format', 401);
   }
 }

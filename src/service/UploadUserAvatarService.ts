@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import User from '../model/User';
 import upload from '../config/upload';
+import AppError from '../errors/AppError';
 
 interface Request {
   user_id: string;
@@ -15,7 +16,7 @@ export default class UploadUserAvatarService {
     const user = await userRepo.findOne({ where: { id: user_id } });
 
     if (!user) {
-      throw new Error('User not authenticated');
+      throw new AppError('User not authenticated');
     }
 
     if (user.avatar) {

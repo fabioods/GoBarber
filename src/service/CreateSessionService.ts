@@ -2,6 +2,7 @@ import { getRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import User from '../model/User';
+import AppError from '../errors/AppError';
 
 interface Request {
   email: string;
@@ -24,13 +25,13 @@ export default class CreateSessionService {
     });
 
     if (!user) {
-      throw new Error('Incorrect email/password combination');
+      throw new AppError('Incorrect email/password combination');
     }
 
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new Error('Incorrect email/password combination');
+      throw new AppError('Incorrect email/password combination');
     }
     const secret = process.env.SECRET;
     const token = sign({}, secret, {
