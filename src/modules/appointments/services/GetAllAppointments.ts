@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
-import Appointment from '../model/Appointment';
-import AppointmentsRepository from '../repository/AppointmentsRepository';
+import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
+import AppointmentsRepository from '@modules/appointments/repositories/AppointmentsRepository';
 
 class GelAllAppointments {
   public async execute(): Promise<Appointment[]> {

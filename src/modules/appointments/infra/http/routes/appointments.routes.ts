@@ -1,8 +1,8 @@
 import { parseISO } from 'date-fns';
 import { Router } from 'express';
-import CreateAppointmentService from '../service/CreateAppointmentService';
-import GetAllAppointments from '../service/GetAllAppointments';
-import ensureAuth from '../middleware/ensureAuth';
+import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
+import GetAllAppointments from '@modules/appointments/services/GetAllAppointments';
+import ensureAuth from '@modules/users/infra/http/middleware/ensureAuth';
 
 const appointmentsRouter = Router();
 
