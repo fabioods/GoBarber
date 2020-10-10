@@ -4,16 +4,18 @@ import fs from 'fs';
 import upload from '@config/upload';
 import User from '@modules/users/infra/typeorm/entities/User';
 import AppError from '@shared/errors/AppError';
+import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 
-interface Request {
+interface IRequest {
   user_id: string;
   user_file_name: string;
 }
 
 export default class UploadUserAvatarService {
-  public async execute({ user_id, user_file_name }: Request): Promise<User> {
-    const userRepo = getRepository(User);
-    const user = await userRepo.findOne({ where: { id: user_id } });
+  constructor(private userRepository: IUsersRepository) {}
+
+  public async execute({ user_id, user_file_name }: IRequest): Promise<User> {
+    const user = await this.userRepository.findById(user_id);
 
     if (!user) {
       throw new AppError('User not authenticated');
@@ -29,7 +31,7 @@ export default class UploadUserAvatarService {
 
     user.avatar = user_file_name;
 
-    await userRepo.save(user);
+    await this.userRepository.save(user);
 
     return user;
   }

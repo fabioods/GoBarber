@@ -15,3 +15,5 @@ O projeto goBarber foi desenvolvido no Bootcamp 13 da RocketSeat
 6 - upload: uso multer para upload de arquivos, cadastro de avatar e arquivos estáticos;
 
 7 - exceptions: tratamentos de excessões em geral;
+
+8 - DDD: implementação da metodologia DDD
