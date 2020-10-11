@@ -17,3 +17,5 @@ O projeto goBarber foi desenvolvido no Bootcamp 13 da RocketSeat
 7 - exceptions: tratamentos de excessões em geral;
 
 8 - DDD: implementação da metodologia DDD
+
+9 - TDD: implementação dos testes unitários com a metodologia TDD
