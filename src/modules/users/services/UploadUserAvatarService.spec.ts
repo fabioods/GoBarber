@@ -42,7 +42,7 @@ describe('UploadUserAvatar', () => {
       password: '123456',
     });
 
-    expect(
+    await expect(
       uploadUserAvatarService.execute({
         user_id: '1',
         user_file_name: 'avatar.jpg',
