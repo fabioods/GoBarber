@@ -7,6 +7,7 @@ export default class ProfileController {
   public async show(req: Request, res: Response): Promise<Response> {
     const showProfile = container.resolve(ShowProfileService);
     const user = await showProfile.execute({ user_id: req.user.id });
+    delete user.password;
     return res.json(user);
   }
 
