@@ -22,6 +22,8 @@ O projeto goBarber foi desenvolvido no Bootcamp 13 da RocketSeat
 
 10 - Estrutura e ajustes:
 
+11 - Perfil do usuário:
+
 # Funcionalidades
 
 ## Recuperação de senha

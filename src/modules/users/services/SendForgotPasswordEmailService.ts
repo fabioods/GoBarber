@@ -4,6 +4,7 @@ import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import { injectable, inject } from 'tsyringe';
 import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
 import IUserTokenRepository from '@modules/users/repositories/IUserTokenRepository';
+import path from 'path';
 
 interface IRequest {
   email: string;
@@ -33,10 +34,10 @@ export default class SendForgotPasswordEmailService {
       },
       subject: '[GOBARBER] Recuperação de senha',
       templateData: {
-        template: 'Olá, {{name}} - {{token}}',
+        file: path.resolve(__dirname, '..', 'views', 'forgot_password.hbs'),
         variables: {
           name: user.name,
-          token,
+          link: `http://localhost:3000/reset_password?token=${token}`,
         },
       },
     });
