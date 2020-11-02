@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 import AppError from '@shared/errors/AppError';
 
-interface TokenResponse {
+interface ITokenResponse {
   iat: number;
   exp: number;
   sub: string;
@@ -23,7 +23,7 @@ export default function ensureAuth(
   const secret = process.env.SECRET;
 
   try {
-    const { sub: id } = verify(token, secret) as TokenResponse;
+    const { sub: id } = verify(token, secret) as ITokenResponse;
     req.user = { id };
     return next();
   } catch {
