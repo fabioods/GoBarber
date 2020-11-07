@@ -10,9 +10,11 @@ describe('CreateAppointment', () => {
       fakeAppointmentsRepository,
     );
     const date = new Date();
+    const user_id = '1';
     const appointment = await createAppointment.execute({
       date,
       provider_id: '123456',
+      user_id,
     });
 
     expect(appointment).toHaveProperty('id');
@@ -24,17 +26,19 @@ describe('CreateAppointment', () => {
     const createAppointment = new CreateAppointmentService(
       fakeAppointmentsRepository,
     );
-
+    const user_id = '1';
     const date = new Date(2020, 4, 10, 11);
     await createAppointment.execute({
       date,
       provider_id: '123456',
+      user_id,
     });
 
     await expect(
       createAppointment.execute({
         date,
         provider_id: '123456',
+        user_id,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
@@ -47,15 +51,17 @@ describe('CreateAppointment', () => {
     const getAppointments = new GelAllAppointmentsService(
       fakeAppointmentsRepository,
     );
-
+    const user_id = '1';
     const appointment01 = await createAppointment.execute({
       date: new Date(2020, 4, 12, 11),
       provider_id: '123456',
+      user_id,
     });
 
     const appointment02 = await createAppointment.execute({
       date: new Date(2020, 4, 12, 15),
       provider_id: '123456',
+      user_id,
     });
 
     const appointments = await getAppointments.execute();
@@ -71,15 +77,17 @@ describe('CreateAppointment', () => {
     const getAppointments = new GelAllAppointmentsService(
       fakeAppointmentsRepository,
     );
-
+    const user_id = '1';
     const appointment01 = await createAppointment.execute({
       date: new Date(2020, 4, 12, 11),
       provider_id: '123456',
+      user_id,
     });
 
     await createAppointment.execute({
       date: new Date(2020, 4, 12, 15),
       provider_id: '123456',
+      user_id,
     });
 
     const appointments = await getAppointments.execute();

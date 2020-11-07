@@ -1,5 +1,4 @@
 import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
-import AppError from '@shared/errors/AppError';
 import CreateAppointmentService from './CreateAppointmentService';
 import ListProviderMonthAvailabilityService from './ListProviderMonthAvailabilityService';
 
@@ -18,17 +17,20 @@ describe('ListProviderMonthAvailability', () => {
     const createAppointment = new CreateAppointmentService(
       fakeAppointmentsRepository,
     );
-
+    const user_id = '1';
     await createAppointment.execute({
       date: new Date(2020, 3, 20, 8, 0, 0),
       provider_id: '123456',
+      user_id,
     });
 
+    // eslint-disable-next-line no-plusplus
     for (let index = 8; index < 18; index++) {
       // eslint-disable-next-line no-await-in-loop
       await createAppointment.execute({
         date: new Date(2020, 4, 20, index, 0, 0),
         provider_id: '123456',
+        user_id,
       });
     }
 
