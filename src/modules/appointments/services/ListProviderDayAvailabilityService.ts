@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError';
 import { injectable, inject } from 'tsyringe';
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
-import { getDaysInMonth, getDate, getHours } from 'date-fns';
+import { getDaysInMonth, getDate, getHours, isAfter } from 'date-fns';
 
 interface IRequest {
   provider_id: string;
@@ -42,7 +42,14 @@ export default class ListProvidersDayAvalabilityService {
       const hasAppointmentsInHour = appointments.find(
         appointment => getHours(appointment.date) === hour,
       );
-      return { hour, available: !hasAppointmentsInHour };
+
+      const currentDate = new Date(Date.now());
+      const compareDate = new Date(year, month - 1, day, hour);
+
+      return {
+        hour,
+        available: !hasAppointmentsInHour && isAfter(compareDate, currentDate),
+      };
     });
 
     return availability;
