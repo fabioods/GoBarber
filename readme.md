@@ -24,6 +24,10 @@ O projeto goBarber foi desenvolvido no Bootcamp 13 da RocketSeat
 
 11 - Perfil do usuário:
 
+12 - Agendamento
+
+13 - Pretador de serviços
+
 # Funcionalidades
 
 ## Recuperação de senha
