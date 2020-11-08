@@ -26,7 +26,9 @@ O projeto goBarber foi desenvolvido no Bootcamp 13 da RocketSeat
 
 12 - Agendamento
 
-13 - Pretador de serviços
+13 - Pretador de serviços;
+
+14 - Personalização para produção;
 
 # Funcionalidades
 
