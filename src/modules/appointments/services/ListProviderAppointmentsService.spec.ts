@@ -1,13 +1,16 @@
 import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
+import FakeNotificationsRepository from '@modules/notifications/repositories/fakes/FakeNotificationsRepository';
 import CreateAppointmentService from './CreateAppointmentService';
 import ListProviderAppointmentsService from './ListProviderAppointmentsService';
 
 let listProviderAppointmentService: ListProviderAppointmentsService;
 let fakeAppointmentsRepository: FakeAppointmentsRepository;
+let fakeNotificationsRepository: FakeNotificationsRepository;
 
 describe('ListProviderAppointments', () => {
   beforeEach(() => {
     fakeAppointmentsRepository = new FakeAppointmentsRepository();
+    fakeNotificationsRepository = new FakeNotificationsRepository();
     listProviderAppointmentService = new ListProviderAppointmentsService(
       fakeAppointmentsRepository,
     );
@@ -16,6 +19,7 @@ describe('ListProviderAppointments', () => {
   it('should be able to list the appointments on a specified date', async () => {
     const createAppointment = new CreateAppointmentService(
       fakeAppointmentsRepository,
+      fakeNotificationsRepository,
     );
     const user_id = '1';
     jest.spyOn(Date, 'now').mockImplementation(() => {
