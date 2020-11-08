@@ -5,6 +5,7 @@ declare global {
       SECRET: string;
       NODE_ENV: 'development' | 'production';
       APP_WEB_URL: string;
+      APP_API_URL: string;
     }
   }
 }
