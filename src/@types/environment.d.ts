@@ -4,14 +4,11 @@ declare global {
     interface ProcessEnv {
       SECRET: string;
       NODE_ENV: 'development' | 'production';
-<<<<<<< HEAD
       APP_WEB_URL: string;
       APP_API_URL: string;
-=======
       REDIS_HOST: string;
       REDIS_PORT: number;
       REDIS_PASS: string;
->>>>>>> master
     }
   }
 }
