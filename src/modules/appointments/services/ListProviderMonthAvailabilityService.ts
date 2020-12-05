@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError';
 import { injectable, inject } from 'tsyringe';
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
-import { getDaysInMonth, getDate } from 'date-fns';
+import { getDaysInMonth, getDate, isAfter } from 'date-fns';
 
 interface IRequest {
   provider_id: string;
@@ -38,11 +38,16 @@ export default class ListProvidersMonthAvalabilityService {
     );
 
     const availability = eachDayArray.map(day => {
+      const compareDate = new Date(year, month - 1, day, 23, 59, 59);
       const appointmentsInDay = appointments.filter(
         appointment => getDate(appointment.date) === day,
       );
 
-      return { day, available: appointmentsInDay.length < 10 };
+      return {
+        day,
+        available:
+          appointmentsInDay.length < 10 && isAfter(compareDate, new Date()),
+      };
     });
 
     return availability;
